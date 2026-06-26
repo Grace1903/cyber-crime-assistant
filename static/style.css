@@ -1,0 +1,39 @@
+body {
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.card {
+  border-radius: 12px;
+  border: none;
+}
+
+.card-header {
+  border-radius: 12px 12px 0 0 !important;
+  font-weight: 600;
+}
+
+.navbar-brand {
+  letter-spacing: 0.5px;
+}
+
+.report-box {
+  background: #fff;
+  border-left: 4px solid #ffc107;
+  border-radius: 8px;
+}
+
+textarea.form-control:focus {
+  border-color: #ffc107;
+  box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
+}
+
+.badge {
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+.progress {
+  border-radius: 4px;
+}
