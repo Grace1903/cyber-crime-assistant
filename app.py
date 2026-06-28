@@ -12,6 +12,7 @@ app = Flask(__name__)
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 def init_db():
+    os.makedirs("database", exist_ok=True)
     conn = sqlite3.connect("database/fraud.db")
     c = conn.cursor()
     c.execute("""
