@@ -12,8 +12,7 @@ app = Flask(__name__)
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 def init_db():
-    os.makedirs("database", exist_ok=True)
-    conn = sqlite3.connect("database/fraud.db")
+    conn = sqlite3.connect("/tmp/fraud.db")
     c = conn.cursor()
     c.execute("""
         CREATE TABLE IF NOT EXISTS cyber_cases (
@@ -115,7 +114,7 @@ Complaint:
     return json.loads(text.strip())
 
 def find_similar_cases(complaint, crime_type):
-    conn = sqlite3.connect("database/fraud.db")
+    conn = sqlite3.connect("/tmp/fraud.db")
     c = conn.cursor()
     c.execute("SELECT crime_category, crime_type, description, risk_level, keywords FROM cyber_cases")
     cases = c.fetchall()
@@ -153,7 +152,7 @@ def analyze():
     try:
         analysis = analyze_with_groq(complaint, category)
         similar = find_similar_cases(complaint, analysis.get("crime_type", ""))
-        conn = sqlite3.connect("database/fraud.db")
+        conn = sqlite3.connect("/tmp/fraud.db")
         c = conn.cursor()
         c.execute("""
             INSERT INTO complaints
@@ -178,7 +177,7 @@ def analyze():
 
 @app.route("/history")
 def history():
-    conn = sqlite3.connect("database/fraud.db")
+    conn = sqlite3.connect("/tmp/fraud.db")
     c = conn.cursor()
     c.execute("SELECT crime_category, crime_type, risk_score, summary, created_at FROM complaints ORDER BY id DESC LIMIT 10")
     rows = c.fetchall()
