@@ -184,6 +184,7 @@ def history():
     conn.close()
     return jsonify([{"crime_category": r[0], "crime_type": r[1], "risk_score": r[2], "summary": r[3], "created_at": r[4]} for r in rows])
 
+init_db()
+
 if __name__ == "__main__":
-    init_db()
     app.run(debug=True)
